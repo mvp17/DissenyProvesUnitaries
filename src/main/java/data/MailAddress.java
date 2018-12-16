@@ -4,8 +4,11 @@ final public class MailAddress {
 
     private final String mail;
 
-    public MailAddress(String mail){
-        this.mail = mail;
+    public MailAddress(String mail) throws IllegalArgumentException{ //TODO some exceptions more???????????
+        if(mail == null)
+            throw new IllegalArgumentException();
+        else
+            this.mail = mail;
     }
 
     public String getMailAddress(){

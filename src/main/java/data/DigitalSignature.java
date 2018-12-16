@@ -4,8 +4,11 @@ final public class DigitalSignature {
 
     private final String sign;
 
-    public DigitalSignature(String sign){
-        this.sign = sign;
+    public DigitalSignature(String sign) throws IllegalArgumentException { //TODO some exceptions more????????????
+        if(sign == null)
+            throw new IllegalArgumentException();
+        else
+            this.sign = sign;
     }
 
     public String getDigitalSignature(){
