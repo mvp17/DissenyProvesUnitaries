@@ -60,7 +60,7 @@ public class VoteCounter {
     public int getVotesFor(Party party) {
         if(!votes.containsKey(party))
             return 0;
-        return votes.get(party); //intValue()
+        return votes.get(party);
     }
 
     public int getNulls() {
