@@ -9,6 +9,7 @@ public class VotingKiosk {
 
     private ElectoralOrganismImpl eoi;
     private MailerServiceImpl msi;
+    private VoteCounter voteCounter;
 
     public VotingKiosk(){
     }
@@ -22,6 +23,7 @@ public class VotingKiosk {
     }
 
     public void vote(Party party) {
+
     }
 
     public void sendeReceipt(MailAddress address) {

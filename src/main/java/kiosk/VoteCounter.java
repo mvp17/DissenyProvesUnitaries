@@ -41,8 +41,20 @@ public class VoteCounter {
         this.totalVotes+=1;
     }
 
-    public void scrutinize(Party party) {//TODO
-        //preguntar que ha de fer exactament
+    public void scrutinize(Party party) {
+        if(party.equals(null))
+            countNull();
+        else if(party.equals(""))
+            countBlank();
+        else {
+            try {
+                countParty(party);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
     public int getVotesFor(Party party) {

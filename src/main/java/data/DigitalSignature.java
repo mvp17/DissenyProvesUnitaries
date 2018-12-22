@@ -2,17 +2,17 @@ package data;
 
 final public class DigitalSignature {
 
-    private final String sign;
+    private final byte[] sign;
     //TODO some exceptions more????????????
 
-    public DigitalSignature(String sign) throws IllegalArgumentException {
+    public DigitalSignature(byte[] sign) throws IllegalArgumentException {
         if(sign == null)
             throw new IllegalArgumentException();
         else
             this.sign = sign;
     }
 
-    public String getDigitalSignature(){
+    public byte[] getDigitalSignature(){
         return sign;
     }
 

@@ -3,6 +3,7 @@ package services;
 import data.DigitalSignature;
 import data.Nif;
 import data.Party;
+import java.nio.charset.StandardCharsets;
 
 public class ElectoralOrganismImpl implements ElectoralOrganism{
 
@@ -18,7 +19,9 @@ public class ElectoralOrganismImpl implements ElectoralOrganism{
 
     @Override
     public DigitalSignature askForDigitalSignature(Party party){
-        DigitalSignature dgsign = new DigitalSignature(party.getName());
-        return dgsign;
+        byte[] bytes = party.getName().getBytes(StandardCharsets.UTF_8);
+        DigitalSignature digitalSignature = new DigitalSignature(bytes);
+        return digitalSignature;
     }
+
 }
