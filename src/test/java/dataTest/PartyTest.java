@@ -10,8 +10,6 @@ public class PartyTest {
 
     @Test
     void partyExceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> {
-            party = new Party(null);
-        });
+        assertThrows(IllegalArgumentException.class, () -> party = new Party(null));
     }
 }

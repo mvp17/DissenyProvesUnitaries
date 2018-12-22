@@ -3,7 +3,7 @@ package data;
 final public class Party {
 
     private final String name;
-    private int votes;
+
 
     public Party(String name) throws IllegalArgumentException {
         if(name == null)
@@ -14,12 +14,6 @@ final public class Party {
     public String getName() {
         return name;
     }
-
-    public int getVotes(){ return votes; } //NEW!!!!!!!!
-
-    public void addVote(){
-        votes+=1;
-    } //NEW!!!!!!!
 
 
     @Override

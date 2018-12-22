@@ -10,8 +10,6 @@ public class DigitalSignatureTest {
 
     @Test
     void partyExceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> {
-            digsign = new DigitalSignature(null);
-        });
+        assertThrows(IllegalArgumentException.class, () -> digsign = new DigitalSignature(null));
     }
 }

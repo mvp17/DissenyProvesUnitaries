@@ -3,8 +3,8 @@ package data;
 final public class MailAddress {
 
     private final String mail;
-
-    public MailAddress(String mail) throws IllegalArgumentException{ //TODO some exceptions more???????????
+    //TODO some exceptions more???????????
+    public MailAddress(String mail) throws IllegalArgumentException{
         if(mail == null)
             throw new IllegalArgumentException();
         else

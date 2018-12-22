@@ -3,8 +3,9 @@ package data;
 final public class DigitalSignature {
 
     private final String sign;
+    //TODO some exceptions more????????????
 
-    public DigitalSignature(String sign) throws IllegalArgumentException { //TODO some exceptions more????????????
+    public DigitalSignature(String sign) throws IllegalArgumentException {
         if(sign == null)
             throw new IllegalArgumentException();
         else

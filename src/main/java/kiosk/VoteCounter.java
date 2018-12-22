@@ -2,19 +2,32 @@ package kiosk;
 
 import data.Party;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 public class VoteCounter {
 
     private int nulls, blanks, totalVotes;
-    private Set<Party> listParty;
+    private ArrayList<Party> listParty;
+    private HashMap<Party, Integer> votes;
 
     public VoteCounter(Set<Party> validParties){
+        listParty = new ArrayList<>();
         listParty.addAll(validParties);
+        votes = new HashMap<>();
     }
 
-    public void countParty(Party party){
-        party.addVote();
+    public void countParty(Party party) throws Exception{
+
+        if(!listParty.contains(party))
+            throw new Exception("El partit no és a la llista inicial");
+
+        if(votes.containsKey(party))
+            votes.put(party, votes.get(party)+1); //intValue()
+        else
+            votes.put(party, 1);
+
         totalVotes+=1;
     }
 
@@ -29,19 +42,22 @@ public class VoteCounter {
     }
 
     public void scrutinize(Party party) {//TODO
+        //preguntar que ha de fer exactament
     }
 
     public int getVotesFor(Party party) {
-        return party.getVotes();
+        if(!votes.containsKey(party))
+            return 0;
+        return votes.get(party); //intValue()
     }
 
     public int getNulls() {
-        return this.nulls;
+        return nulls;
     }
 
     public int getBlanks() {
-        return this.blanks;
+        return blanks;
     }
 
-    public int getTotal() { return this.totalVotes; }
+    public int getTotal() { return totalVotes; }
 }
