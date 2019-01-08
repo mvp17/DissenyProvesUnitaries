@@ -22,12 +22,12 @@ public class VoteCounter {
 
         if(!listParty.contains(party))
             throw new Exception("El partit no és a la llista inicial");
-
-        if(votes.containsKey(party))
-            votes.put(party, votes.get(party)+1); //intValue()
-        else
-            votes.put(party, 1);
-
+        else {
+            if (votes.containsKey(party))
+                votes.put(party, votes.get(party) + 1); //TODO votes.intValue() ??
+            else
+                votes.put(party, 1);
+        }
         totalVotes+=1;
     }
 
@@ -42,9 +42,9 @@ public class VoteCounter {
     }
 
     public void scrutinize(Party party) {
-        if(party.equals(null))
+        if(party == null) //TODO party.getName ??
             countNull();
-        else if(party.equals(""))
+        else if(party.getName().equals(""))
             countBlank();
         else {
             try {
