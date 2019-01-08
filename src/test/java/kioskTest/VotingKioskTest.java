@@ -8,10 +8,10 @@ import kiosk.VotingKiosk;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.ElectoralOrganism;
-import services.ElectoralOrganismImpl;
 import services.MailerService;
 
-import java.net.NetworkInterface;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,23 +19,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class VotingKioskTest {
 
     private VotingKiosk votingKiosk;
-    private ElectoralOrganismMock eo;
-    private MailerServiceSpy mss;
+    private ElectoralOrganism eo;
+    private MailerService ms;
 
     @BeforeEach
     void setUp(){
         votingKiosk = new VotingKiosk();
         eo = new ElectoralOrganismMock();
-        setUpElectoralOrganism(eo);
-        mss = new MailerServiceSpy();
-        //setUpMailerService(mss);
-        //votingKiosk.setElectoralOrganism(eo);
+        setUpElectoralOrganism((ElectoralOrganismMock) eo);
+        votingKiosk.setElectoralOrganism(eo);
+        ms = new MailerServiceSpy();
+        votingKiosk.setMailerService(ms);
     }
 
-    /*
-    private void setUpMailerService(MailerServiceSpy mss){
-
-    }*/
     private void setUpElectoralOrganism(ElectoralOrganismMock eo){
         Nif n1 = new Nif("74824586T");
         Nif n2 = new Nif("35478908Y");
@@ -60,20 +56,19 @@ class VotingKioskTest {
     }
 
     private static class ElectoralOrganismMock implements ElectoralOrganism{
-        private ArrayList<Nif> voters = new ArrayList<>();
-        private ArrayList<Nif> census = new ArrayList<>();
-        private ArrayList<Nif> pollingStation = new ArrayList<>();
+        private ArrayList<Nif> voters = new ArrayList<>(); //check if the voter has just vote
+        private ArrayList<Nif> census = new ArrayList<>(); //check if the voter is in the electoral census
+        private ArrayList<Nif> pollingStation = new ArrayList<>(); //check if the voter is in the correct polling station
         private Nif nif;
 
         public boolean canVote(Nif nif){
-            if(voters.contains(nif))
-                return false;
-            if(conditions(nif)) {
+            if(!voters.contains(nif) && conditions(nif)) {
                 this.nif = nif;
                 return true;
             }else
                 return false;
         }
+
         private boolean conditions(Nif nif){ //Voter conditions to vote
             return census.contains(nif) && pollingStation.contains(nif);
         }
@@ -82,31 +77,40 @@ class VotingKioskTest {
             voters.add(nif);
         }
         public DigitalSignature askForDigitalSignature(Party party){
-            return null;
+            byte[] bytes = party.getName().getBytes(StandardCharsets.UTF_8);
+            return new DigitalSignature(bytes);
         }
     }
 
     @Test
-    void voteTest(){
+    void canVoteTest(){
         Party p1 = new Party("Party 1");
         Nif n1 = new Nif("74824586T");
         Nif n2 = new Nif("35478908Y");
         Nif n3 = new Nif("12345678K");
         Nif n4 = new Nif("74185296R");
-        Nif n5 = new Nif("85961245F");
-        assertFalse(eo.canVote(n2));
-        assertTrue(eo.canVote(n3));
+        assertFalse(votingKiosk.eo.canVote(n2));
+        assertTrue(votingKiosk.eo.canVote(n3));
+        //votingKiosk.vote(p1);
+        assertTrue(votingKiosk.eo.canVote(n1));
+        assertFalse(votingKiosk.eo.canVote(n4));
 
     }
 
     @Test
+    void disableVoterTest() {
+
+    }
+
+
+    @Test
     void sendeReceiptTest(){
-        ElectoralOrganism eo = new ElectoralOrganismImpl();
-        Party p1 = new Party("Partit 1");
+
+        Party p1 = new Party("Partit1");
         DigitalSignature digitalSignature = eo.askForDigitalSignature(p1);
         MailAddress address = new MailAddress("mvp17@gmail.com");
-        mss.send(address, digitalSignature);
-        assertEquals(1,mss.mailsSent);
+        votingKiosk.mService.send(address, digitalSignature);
+        //assertEquals(1,);
 
     }
 
