@@ -2,6 +2,8 @@ package dataTest;
 
 import data.Party;
 import org.junit.jupiter.api.Test;
+import services.NullException;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PartyTest {
@@ -10,6 +12,6 @@ public class PartyTest {
 
     @Test
     void partyExceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> party = new Party(null));
+        assertThrows(NullException.class, () -> party = new Party(null));
     }
 }

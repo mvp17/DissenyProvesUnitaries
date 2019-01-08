@@ -1,6 +1,7 @@
 package kiosk;
 
 import data.Party;
+import services.NotContainsElement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +19,10 @@ public class VoteCounter {
         votes = new HashMap<>();
     }
 
-    public void countParty(Party party) throws Exception{
+    public void countParty(Party party){
 
         if(!listParty.contains(party))
-            throw new Exception("El partit no és a la llista inicial");
+            throw new NotContainsElement("El partit no és a la llista inicial");
         else {
             if (votes.containsKey(party))
                 votes.put(party, votes.get(party) + 1); //TODO votes.intValue() ??
@@ -42,7 +43,7 @@ public class VoteCounter {
     }
 
     public void scrutinize(Party party) {
-        if(party == null) //TODO party.getName ??
+        if(party.getName().equals("null")) //TODO party.getName ??
             countNull();
         else if(party.getName().equals(""))
             countBlank();

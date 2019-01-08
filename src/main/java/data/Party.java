@@ -1,15 +1,17 @@
 package data;
 
+import services.NullException;
+
 final public class Party {
 
     private final String name;
 
 
-    public Party(String name) throws IllegalArgumentException {
+    public Party(String name){
         if(name == null)
-            throw new IllegalArgumentException();
-        else
-            this.name = name;
+            throw new NullException();
+
+        this.name = name;
     }
     public String getName() {
         return name;

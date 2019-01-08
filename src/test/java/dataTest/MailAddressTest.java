@@ -2,6 +2,8 @@ package dataTest;
 
 import data.MailAddress;
 import org.junit.jupiter.api.Test;
+import services.NullException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MailAddressTest {
@@ -10,6 +12,6 @@ public class MailAddressTest {
 
     @Test
     void partyExceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> mail = new MailAddress(null));
+        assertThrows(NullException.class, () -> mail = new MailAddress(null));
     }
 }

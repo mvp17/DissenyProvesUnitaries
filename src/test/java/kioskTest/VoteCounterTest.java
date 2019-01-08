@@ -4,6 +4,7 @@ import data.Party;
 import kiosk.VoteCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.NotContainsElement;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashSet;
@@ -24,7 +25,7 @@ public class VoteCounterTest {
     }
 
     @Test
-    void countPartyTest() throws Exception {
+    void countPartyTest() {
         Party party = new Party("PP");
         Party party1 = new Party("PSOE");
 
@@ -39,6 +40,6 @@ public class VoteCounterTest {
     @Test
     void countPartyExceptionTest(){
         Party party = new Party("PdeCat");
-        assertThrows(Exception.class, ()-> voteCounter.countParty(party));
+        assertThrows(NotContainsElement.class, ()-> voteCounter.countParty(party));
     }
 }

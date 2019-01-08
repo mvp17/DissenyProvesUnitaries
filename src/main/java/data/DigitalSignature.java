@@ -1,15 +1,17 @@
 package data;
 
+import services.NullException;
+
 final public class DigitalSignature {
 
     private final byte[] sign;
     //TODO some exceptions more????????????
 
-    public DigitalSignature(byte[] sign) throws IllegalArgumentException {
+    public DigitalSignature(byte[] sign) {
         if(sign == null)
-            throw new IllegalArgumentException();
-        else
-            this.sign = sign;
+            throw new NullException();
+
+        this.sign = sign;
     }
 
     public byte[] getDigitalSignature(){
@@ -28,7 +30,7 @@ final public class DigitalSignature {
 
     @Override
     public int hashCode() {
-        return sign.hashCode();
+        return this.sign.hashCode();
     }
 
     @Override

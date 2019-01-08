@@ -1,14 +1,16 @@
 package data;
 
+import services.NullException;
+
 final public class MailAddress {
 
     private final String mail;
     //TODO some exceptions more???????????
-    public MailAddress(String mail) throws IllegalArgumentException{
+    public MailAddress(String mail){
         if(mail == null)
-            throw new IllegalArgumentException();
-        else
-            this.mail = mail;
+            throw new NullException();
+
+        this.mail = mail;
     }
 
     public String getMailAddress(){

@@ -1,15 +1,16 @@
 package data;
 
+import services.NullException;
+
 final public class Nif {
 
     private final String idNum; //alphanumeric
 
-    public Nif(String nif) throws IllegalArgumentException{
-
+    public Nif(String nif){
         if(!isCorrect(nif))
-            throw new IllegalArgumentException();
-        else
-            this.idNum = nif;
+            throw new NullException();
+
+        this.idNum = nif;
     }
 
     private boolean isCorrect(String nif){
