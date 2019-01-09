@@ -12,21 +12,26 @@ import java.util.Set;
 
 public class VotingKiosk {
 
-    public ElectoralOrganism eo;
-    public MailerService mService;
-    private VoteCounter voteCounter;
+    private ElectoralOrganism eO;
+    private MailerService mService;
+    public VoteCounter voteCounter; //todo no es pot fer un getter per aquest
     private Set<Party> parties;
-    private Party party;
+    private Party party; //for method askForDigitalSignature
+
+    public ElectoralOrganism getElectoralOrganism(){
+        return eO;
+    }
+
+    public Set<Party> getParties(){
+        return parties;
+    }
 
     public VotingKiosk(){
         parties = new HashSet<>();
-        parties.add(new Party("Partit 1"));
-        parties.add(new Party("Partit 2"));
-        voteCounter = new VoteCounter(parties);
     }
 
     public void setElectoralOrganism(ElectoralOrganism eO) {
-        this.eo = eO;
+        this.eO = eO;
     }
 
     public void setMailerService(MailerService mService){
@@ -35,13 +40,11 @@ public class VotingKiosk {
 
     public void vote(Party party) {
         this.party = party;
-        //eo.disableVoter();
-        //sendeReceipt(mService.);
         voteCounter.scrutinize(party);
     }
 
     public void sendeReceipt(MailAddress address) {
-        DigitalSignature digitalSignature = eo.askForDigitalSignature(party);
+        DigitalSignature digitalSignature = eO.askForDigitalSignature(party); //party of method vote
         mService.send(address,digitalSignature);
     }
 }

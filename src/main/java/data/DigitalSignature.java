@@ -5,7 +5,7 @@ import services.NullException;
 final public class DigitalSignature {
 
     private final byte[] sign;
-    //TODO some exceptions more????????????
+    //TODO some exceptions more?
 
     public DigitalSignature(byte[] sign) {
         if(sign == null)

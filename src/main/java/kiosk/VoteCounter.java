@@ -25,7 +25,7 @@ public class VoteCounter {
             throw new NotContainsElement("El partit no és a la llista inicial");
         else {
             if (votes.containsKey(party))
-                votes.put(party, votes.get(party) + 1); //TODO votes.intValue() ??
+                votes.put(party, votes.get(party) + 1);
             else
                 votes.put(party, 1);
         }
@@ -43,7 +43,7 @@ public class VoteCounter {
     }
 
     public void scrutinize(Party party) {
-        if(party.getName().equals("null")) //TODO party.getName ??
+        if(party.getName().equals("null"))
             countNull();
         else if(party.getName().equals(""))
             countBlank();
@@ -54,8 +54,6 @@ public class VoteCounter {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     public int getVotesFor(Party party) {
