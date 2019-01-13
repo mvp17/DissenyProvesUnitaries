@@ -1,8 +1,6 @@
 package kiosk;
 
 import data.Party;
-import services.NotContainsElement;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -22,7 +20,7 @@ public class VoteCounter {
     public void countParty(Party party){
 
         if(!listParty.contains(party))
-            throw new NotContainsElement("El partit no és a la llista inicial");
+            throw new NotContainsElement("The party is not in the initial list");
         else {
             if (votes.containsKey(party))
                 votes.put(party, votes.get(party) + 1);

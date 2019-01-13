@@ -7,15 +7,11 @@ import services.ElectoralOrganism;
 import services.MailerService;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class VotingKiosk {
 
     private ElectoralOrganism eO;
     private MailerService mService;
-    private VoteCounter voteCounter; //todo no es pot fer un getter per aquest
-    //private Set<Party> parties;
+    private VoteCounter voteCounter;
     private Party party; //for method askForDigitalSignature
 
     public ElectoralOrganism getElectoralOrganism(){
@@ -27,7 +23,6 @@ public class VotingKiosk {
     }
 
     public VotingKiosk(){
-        //parties = new HashSet<>();
     }
 
     public void setElectoralOrganism(ElectoralOrganism eO) {
@@ -48,7 +43,7 @@ public class VotingKiosk {
     }
 
     public void sendeReceipt(MailAddress address) {
-        DigitalSignature digitalSignature = eO.askForDigitalSignature(party); //party of method vote
+        DigitalSignature digitalSignature = eO.askForDigitalSignature(party); //party for method vote
         mService.send(address, digitalSignature);
     }
 }

@@ -4,8 +4,7 @@ import data.Party;
 import kiosk.VoteCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import services.NotContainsElement;
-
+import kiosk.NotContainsElement;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashSet;
 
@@ -19,7 +18,8 @@ public class VoteCounterTest {
         Party party = new Party("PP");
         Party party1 = new Party("PSOE");
         listParties = new HashSet<>();
-        listParties.add(party); listParties.add(party1);
+        listParties.add(party);
+        listParties.add(party1);
         voteCounter = new VoteCounter(listParties);
     }
 
@@ -32,6 +32,7 @@ public class VoteCounterTest {
         voteCounter.countParty(party);
         assertEquals(voteCounter.getVotesFor(party), 2);
         assertEquals(voteCounter.getVotesFor(party1), 0);
+
         assertEquals(2,voteCounter.getTotal());
     }
 
@@ -51,8 +52,6 @@ public class VoteCounterTest {
         assertEquals(2, voteCounter.getBlanks());
 
         assertEquals(5, voteCounter.getTotal());
-
-
     }
 
     @Test

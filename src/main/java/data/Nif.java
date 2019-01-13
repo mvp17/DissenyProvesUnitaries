@@ -1,7 +1,5 @@
 package data;
 
-import services.NullException;
-
 final public class Nif {
 
     private final String idNum; //alphanumeric

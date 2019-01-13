@@ -27,18 +27,13 @@ class VotingKioskTest {
     void setUp(){
         parties = new HashSet<>();
         setUpListParties(parties);
-
         votingKiosk = new VotingKiosk();
-
         electoralOrganismMock = new ElectoralOrganismMock();
         setUpElectoralOrganism(electoralOrganismMock);
         votingKiosk.setElectoralOrganism(electoralOrganismMock);
-
         mailerServiceSpy = new MailerServiceSpy();
         votingKiosk.setMailerService(mailerServiceSpy);
-
-        votingKiosk.setVoteCounter(new VoteCounter(parties));//passem la llista de partits valids desde aqui
-
+        votingKiosk.setVoteCounter(new VoteCounter(parties));
     }
 
     private void setUpListParties(Set<Party> parties){
@@ -149,14 +144,6 @@ class VotingKioskTest {
         }
         assertFalse(votingKiosk.getElectoralOrganism().canVote(n1));
 
-        Party p2 = new Party("Primer");
-        Nif n2 = new Nif("12345678K");
-        if(votingKiosk.getElectoralOrganism().canVote(n2)){
-            votingKiosk.vote(p2);
-            votingKiosk.getElectoralOrganism().disableVoter(n2);
-        }
-        assertFalse(votingKiosk.getElectoralOrganism().canVote(n2));
-
         Party p3 = new Party("Segon");
         Nif n3 = new Nif("74824586T");
         if(votingKiosk.getElectoralOrganism().canVote(n3)){
@@ -166,11 +153,8 @@ class VotingKioskTest {
         assertFalse(votingKiosk.getElectoralOrganism().canVote(n3));
     }
 
-
     @Test
     void sendeReceiptTest(){
-        //votingKiosk.setMailerService(mailerServiceSpy);
-
         Party p1 = new Party("Primer");
         Nif n1 = new Nif("12345678K");
         MailAddress address1 = new MailAddress("mvp17@gmail.com");

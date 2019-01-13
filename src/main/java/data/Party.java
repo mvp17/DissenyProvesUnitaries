@@ -1,11 +1,8 @@
 package data;
 
-import services.NullException;
-
 final public class Party {
 
     private final String name;
-
 
     public Party(String name){
         if(name == null)

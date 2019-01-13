@@ -1,11 +1,9 @@
 package data;
 
-import services.NullException;
-
 final public class MailAddress {
 
     private final String mail;
-    //TODO some exceptions more?
+
     public MailAddress(String mail){
         if(mail == null)
             throw new NullException();
