@@ -27,7 +27,7 @@ public class VotingKiosk {
     }
 
     public void setParties(Set<Party> parties){
-        parties.addAll(parties);
+        this.parties.addAll(parties);
     }
 
     public VotingKiosk(){
