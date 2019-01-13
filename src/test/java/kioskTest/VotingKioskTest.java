@@ -74,7 +74,6 @@ class VotingKioskTest {
         public void send(MailAddress address, DigitalSignature signature) {
             mailsSent+=1;
         }
-        public int getMails(){return mailsSent;}
     }
 
     private static class ElectoralOrganismMock implements ElectoralOrganism{
@@ -185,7 +184,7 @@ class VotingKioskTest {
             votingKiosk.getElectoralOrganism().disableVoter(n1);
             votingKiosk.sendeReceipt(address1);
         }
-        assertEquals(1,mailerServiceSpy.getMails());
+        assertEquals(1,mailerServiceSpy.mailsSent);
 
         Nif n2 = new Nif("74824586T");
         Party p2 = new Party("Segon");
@@ -196,6 +195,6 @@ class VotingKioskTest {
             votingKiosk.getElectoralOrganism().disableVoter(n2);
             votingKiosk.sendeReceipt(address2);
         }
-        assertEquals(2,mailerServiceSpy.getMails());
+        assertEquals(2,mailerServiceSpy.mailsSent);
     }
 }
