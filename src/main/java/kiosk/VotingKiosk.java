@@ -15,7 +15,7 @@ public class VotingKiosk {
     private ElectoralOrganism eO;
     private MailerService mService;
     private VoteCounter voteCounter; //todo no es pot fer un getter per aquest
-    private Set<Party> parties;
+    //private Set<Party> parties;
     private Party party; //for method askForDigitalSignature
 
     public ElectoralOrganism getElectoralOrganism(){
@@ -27,7 +27,7 @@ public class VotingKiosk {
     }
 
     public VotingKiosk(){
-        parties = new HashSet<>();
+        //parties = new HashSet<>();
     }
 
     public void setElectoralOrganism(ElectoralOrganism eO) {
@@ -49,6 +49,6 @@ public class VotingKiosk {
 
     public void sendeReceipt(MailAddress address) {
         DigitalSignature digitalSignature = eO.askForDigitalSignature(party); //party of method vote
-        mService.send(address,digitalSignature);
+        mService.send(address, digitalSignature);
     }
 }

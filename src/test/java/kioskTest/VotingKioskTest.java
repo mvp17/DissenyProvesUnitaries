@@ -111,7 +111,7 @@ class VotingKioskTest {
     }
 
     @Test
-    void voteTest() {
+    void votePartyTest() {
         Party p1 = new Party("Primer");
         votingKiosk.vote(p1);
         assertEquals(1,votingKiosk.getVoteCounter().getVotesFor(p1));
@@ -148,25 +148,22 @@ class VotingKioskTest {
             votingKiosk.getElectoralOrganism().disableVoter(n1);
         }
         assertFalse(votingKiosk.getElectoralOrganism().canVote(n1));
-    }
 
-    @Test
-    void disableVoterTest1(){
-        Party p1 = new Party("Primer");
-        Nif n1 = new Nif("12345678K");
-        if(votingKiosk.getElectoralOrganism().canVote(n1)){
-            votingKiosk.vote(p1);
-            votingKiosk.getElectoralOrganism().disableVoter(n1);
-        }
-        assertFalse(votingKiosk.getElectoralOrganism().canVote(n1));
-
-        Party p2 = new Party("Segon");
-        Nif n2 = new Nif("74824586T");
+        Party p2 = new Party("Primer");
+        Nif n2 = new Nif("12345678K");
         if(votingKiosk.getElectoralOrganism().canVote(n2)){
             votingKiosk.vote(p2);
             votingKiosk.getElectoralOrganism().disableVoter(n2);
         }
         assertFalse(votingKiosk.getElectoralOrganism().canVote(n2));
+
+        Party p3 = new Party("Segon");
+        Nif n3 = new Nif("74824586T");
+        if(votingKiosk.getElectoralOrganism().canVote(n3)){
+            votingKiosk.vote(p3);
+            votingKiosk.getElectoralOrganism().disableVoter(n3);
+        }
+        assertFalse(votingKiosk.getElectoralOrganism().canVote(n3));
     }
 
 
