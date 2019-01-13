@@ -26,10 +26,6 @@ public class VotingKiosk {
         return voteCounter;
     }
 
-    public void setParties(Set<Party> parties){
-        this.parties.addAll(parties);
-    }
-
     public VotingKiosk(){
         parties = new HashSet<>();
     }

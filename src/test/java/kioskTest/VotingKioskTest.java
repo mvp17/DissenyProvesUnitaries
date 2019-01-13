@@ -37,7 +37,6 @@ class VotingKioskTest {
         mailerServiceSpy = new MailerServiceSpy();
         votingKiosk.setMailerService(mailerServiceSpy);
 
-        votingKiosk.setParties(parties);
         votingKiosk.setVoteCounter(new VoteCounter(parties));//passem la llista de partits valids desde aqui
 
     }
