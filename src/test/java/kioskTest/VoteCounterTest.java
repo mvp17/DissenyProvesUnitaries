@@ -32,7 +32,7 @@ public class VoteCounterTest {
         voteCounter.countParty(party);
         assertEquals(voteCounter.getVotesFor(party), 2);
         assertEquals(voteCounter.getVotesFor(party1), 0);
-        assertEquals(3,voteCounter.getTotal());
+        assertEquals(2,voteCounter.getTotal());
     }
 
     @Test
