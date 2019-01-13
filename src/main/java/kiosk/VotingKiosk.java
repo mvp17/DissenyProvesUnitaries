@@ -14,7 +14,7 @@ public class VotingKiosk {
 
     private ElectoralOrganism eO;
     private MailerService mService;
-    public VoteCounter voteCounter; //todo no es pot fer un getter per aquest
+    private VoteCounter voteCounter; //todo no es pot fer un getter per aquest
     private Set<Party> parties;
     private Party party; //for method askForDigitalSignature
 
@@ -22,8 +22,12 @@ public class VotingKiosk {
         return eO;
     }
 
-    public Set<Party> getParties(){
-        return parties;
+    public VoteCounter getVoteCounter(){
+        return voteCounter;
+    }
+
+    public void setParties(Set<Party> parties){
+        parties.addAll(parties);
     }
 
     public VotingKiosk(){
@@ -32,6 +36,10 @@ public class VotingKiosk {
 
     public void setElectoralOrganism(ElectoralOrganism eO) {
         this.eO = eO;
+    }
+
+    public void setVoteCounter(VoteCounter vc){
+        this.voteCounter = vc;
     }
 
     public void setMailerService(MailerService mService){

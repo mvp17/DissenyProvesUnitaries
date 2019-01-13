@@ -29,14 +29,16 @@ class VotingKioskTest {
         setUpListParties(parties);
 
         votingKiosk = new VotingKiosk();
+
         electoralOrganismMock = new ElectoralOrganismMock();
         setUpElectoralOrganism(electoralOrganismMock);
         votingKiosk.setElectoralOrganism(electoralOrganismMock);
+
         mailerServiceSpy = new MailerServiceSpy();
         votingKiosk.setMailerService(mailerServiceSpy);
 
-        votingKiosk.getParties().addAll(parties);
-        votingKiosk.voteCounter = new VoteCounter(parties);//passem la llista de partits valids desde aqui
+        votingKiosk.setParties(parties);
+        votingKiosk.setVoteCounter(new VoteCounter(parties));//passem la llista de partits valids desde aqui
 
     }
 
@@ -72,6 +74,7 @@ class VotingKioskTest {
         public void send(MailAddress address, DigitalSignature signature) {
             mailsSent+=1;
         }
+        public int getMails(){return mailsSent;}
     }
 
     private static class ElectoralOrganismMock implements ElectoralOrganism{
@@ -113,29 +116,29 @@ class VotingKioskTest {
     void voteTest() {
         Party p1 = new Party("Primer");
         votingKiosk.vote(p1);
-        assertEquals(1,votingKiosk.voteCounter.getVotesFor(p1));
+        assertEquals(1,votingKiosk.getVoteCounter().getVotesFor(p1));
         votingKiosk.vote(p1);
-        assertEquals(2,votingKiosk.voteCounter.getVotesFor(p1));
+        assertEquals(2,votingKiosk.getVoteCounter().getVotesFor(p1));
     }
 
     @Test
     void voteNullTest(){
         Party test = new Party("null");
         votingKiosk.vote(test);
-        assertEquals(1,votingKiosk.voteCounter.getNulls());
+        assertEquals(1,votingKiosk.getVoteCounter().getNulls());
         Party test1 = new Party("null");
         votingKiosk.vote(test1);
-        assertEquals(2,votingKiosk.voteCounter.getNulls());
+        assertEquals(2,votingKiosk.getVoteCounter().getNulls());
     }
 
     @Test
     void voteBlankTest(){
         Party test = new Party("");
         votingKiosk.vote(test);
-        assertEquals(1,votingKiosk.voteCounter.getBlanks());
+        assertEquals(1,votingKiosk.getVoteCounter().getBlanks());
         Party test1 = new Party("");
         votingKiosk.vote(test1);
-        assertEquals(2,votingKiosk.voteCounter.getBlanks());
+        assertEquals(2,votingKiosk.getVoteCounter().getBlanks());
     }
 
     @Test
@@ -171,7 +174,7 @@ class VotingKioskTest {
 
     @Test
     void sendeReceiptTest(){
-        votingKiosk.setMailerService(mailerServiceSpy);
+        //votingKiosk.setMailerService(mailerServiceSpy);
 
         Party p1 = new Party("Primer");
         Nif n1 = new Nif("12345678K");
@@ -182,7 +185,7 @@ class VotingKioskTest {
             votingKiosk.getElectoralOrganism().disableVoter(n1);
             votingKiosk.sendeReceipt(address1);
         }
-        assertEquals(1,mailerServiceSpy.mailsSent);
+        assertEquals(1,mailerServiceSpy.getMails());
 
         Nif n2 = new Nif("74824586T");
         Party p2 = new Party("Segon");
@@ -193,6 +196,6 @@ class VotingKioskTest {
             votingKiosk.getElectoralOrganism().disableVoter(n2);
             votingKiosk.sendeReceipt(address2);
         }
-        assertEquals(2,mailerServiceSpy.mailsSent);
+        assertEquals(2,mailerServiceSpy.getMails());
     }
 }
